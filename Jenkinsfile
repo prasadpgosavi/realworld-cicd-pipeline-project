@@ -70,7 +70,7 @@ pipeline {
         expression { currentBuild.currentResult == 'SUCCESS' }
         }
         steps {
-          timeout(time : 5, unit : 'HOURS'){
+          timeout(time : 10, unit : 'HOURS'){
           waitForQualityGate abortPipeline: false 
           }
        }
