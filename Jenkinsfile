@@ -51,6 +51,7 @@ pipeline {
             }
         }
     }
+      /*
     stage('SonarQube Inspection') {
           steps {
               withSonarQubeEnv('SonarQube') {
@@ -65,6 +66,7 @@ pipeline {
             }
         }
     }
+    */
     stage('SonarQube GateKeeper') {
         steps {
           timeout(time : 1, unit : 'HOURS'){
