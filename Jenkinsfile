@@ -66,6 +66,9 @@ pipeline {
         }
     }
     stage('SonarQube GateKeeper') {
+        when {
+        expression { currentBuild.currentResult == 'SUCCESS' }
+        }
         steps {
           timeout(time : 1, unit : 'HOURS'){
           waitForQualityGate abortPipeline: true
