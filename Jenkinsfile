@@ -51,7 +51,6 @@ pipeline {
             }
         }
     }
-      /*
     stage('SonarQube Inspection') {
           steps {
               withSonarQubeEnv('SonarQube') {
@@ -59,14 +58,13 @@ pipeline {
                     sh '''
                         mvn clean verify sonar:sonar \
                             -Dsonar.projectKey=JavaWebApp-Project \
-                            -Dsonar.host.url=http://172.31.87.226:9000 \
-                            -Dsonar.login=${SONAR_TOKEN}
+                            -Dsonar.host.url=http://54.159.202.39:9000 \
+                            -Dsonar.login=4a9aa8fd04b76c21d683b24d96acabd063ffbf22
                     '''
                 }
             }
         }
     }
-    */
     stage('SonarQube GateKeeper') {
         steps {
           timeout(time : 1, unit : 'HOURS'){
