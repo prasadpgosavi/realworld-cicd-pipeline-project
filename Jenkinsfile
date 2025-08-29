@@ -96,15 +96,9 @@ pipeline {
             HOSTS = 'dev'
         }
         steps {
-            withCredentials([sshUserPrivateKey(credentialsId: 'ec2-key', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
-                sh '''
-                    ansible-playbook \
-                      -i ansible-config/aws_ec2.yaml \
-                      deploy.yaml \
-                      --extra-vars "ansible_user=$SSH_USER ansible_ssh_private_key_file=$SSH_KEY workspace_path=$WORKSPACE"
-                '''
+            withCredentials([usernamePassword(credentialsId: 'Ansible-Credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
+                sh "ansible-playbook -i ${WORKSPACE}/ansible-config/aws_ec2.yaml ${WORKSPACE}/deploy.yaml --extra-vars \"ansible_user=$USER_NAME ansible_password=$PASSWORD hosts=tag_Environment_$HOSTS workspace_path=$WORKSPACE\""
             }
-
         }
     }
     stage('Deploy to Staging Env') {
